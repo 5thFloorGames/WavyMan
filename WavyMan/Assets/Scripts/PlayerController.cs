@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         transform.Translate(new Vector2(Input.GetAxisRaw("Horizontal") * Time.deltaTime, 0));
-        if (Input.GetButtonUp("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && grounded)
         {
             grounded = false;
             bod.velocity = jumpForce;
