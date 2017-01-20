@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody bod;
     public Vector3 jumpForce;
     private bool grounded = true;
-    public float horizontalVelocity = 2;
+    public float horizontalMaxDistanceFromCenter = 2;
     public GameObject curveNodePrefab;
 
     void Awake()
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        transform.Translate(new Vector2(Input.GetAxisRaw("Horizontal") * horizontalVelocity * Time.deltaTime, 0));
+        transform.position = new Vector3(Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter, transform.position.y, transform.position.z);
         if (Input.GetButtonDown("Jump") && grounded)
         {
             grounded = false;
