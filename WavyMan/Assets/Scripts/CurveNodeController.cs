@@ -15,7 +15,16 @@ public class CurveNodeController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(translation * Time.deltaTime);
+        transform.position += (translation * Time.deltaTime);
+    }
+
+    public void SetPreviousNode(GameObject node)
+    {
+        if (node != null)
+        {
+            transform.LookAt(node.transform);
+            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, Vector3.Distance(transform.position, node.transform.position) * 1.1f);
+        }
     }
 
     private IEnumerator DisableAfterDelay(float time)
