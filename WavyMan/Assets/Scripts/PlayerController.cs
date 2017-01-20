@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private bool grounded = true;
     public float horizontalMaxDistanceFromCenter = 2;
     public GameObject curveNodePrefab;
+    public float horizontalSmoothness = 0.25f;
 
     void Awake()
     {
@@ -37,7 +38,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        transform.position = new Vector3(Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter, transform.position.y, transform.position.z);
+        Vector3 targetPosition = new Vector3(Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter, transform.position.y, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, horizontalSmoothness);
         if (Input.GetButtonDown("Jump") && grounded)
         {
             grounded = false;
