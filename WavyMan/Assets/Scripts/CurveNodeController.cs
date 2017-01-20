@@ -7,6 +7,7 @@ public class CurveNodeController : MonoBehaviour
 
     public Vector3 translation;
     public float timeToLive = 10;
+    public float strength;
 
     void OnEnable()
     {
@@ -25,6 +26,12 @@ public class CurveNodeController : MonoBehaviour
             transform.LookAt(node.transform);
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, Vector3.Distance(transform.position, node.transform.position) * 1.1f);
         }
+    }
+
+    public void SetStrength(float strength)
+    {
+        this.strength = strength;
+        //transform.GetChild(1).localScale = Vector3.one * strength;
     }
 
     private IEnumerator DisableAfterDelay(float time)

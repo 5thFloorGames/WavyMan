@@ -9,17 +9,28 @@ public class PlayerController : MonoBehaviour
     private bool grounded = true;
     public float horizontalMaxDistanceFromCenter = 2;
     public GameObject curveNodePrefab;
+    public GameObject damageNodePrefab;
     public float horizontalSmoothness = 0.25f;
+    private GameObject currentNode = null;
+    private GameObject previousNode = null;
+    private float horizontalDelta;
 
     void Awake()
     {
         bod = GetComponent<Rigidbody>();
-        StartCoroutine(SpawnCurveNodes());
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleInput();
+        if (horizontalDelta > 1)
+        {
+            Instantiate(damageNodePrefab, previousNode.transform.position, Quaternion.identity);
+        }
+        previousNode = currentNode;
+        currentNode = Instantiate(curveNodePrefab, transform.position, Quaternion.identity);
+        currentNode.GetComponent<CurveNodeController>().SetPreviousNode(previousNode);
+        currentNode.GetComponent<CurveNodeController>().SetStrength(horizontalDelta);
     }
 
     void OnCollisionEnter(Collision col)
@@ -27,22 +38,11 @@ public class PlayerController : MonoBehaviour
         grounded = true;
     }
 
-    private IEnumerator SpawnCurveNodes()
-    {
-        GameObject currentNode = null;
-        GameObject previousNode = null;
-        while (true)
-        {
-            previousNode = currentNode;
-            currentNode = Instantiate(curveNodePrefab, transform.position, Quaternion.identity);
-            currentNode.GetComponent<CurveNodeController>().SetPreviousNode(previousNode);
-            yield return new WaitForFixedUpdate();
-        }
-    }
-
     private void HandleInput()
     {
-        Vector3 targetPosition = new Vector3(Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter, transform.position.y, transform.position.z);
+        float horizontalAxisScaled = Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter;
+        Vector3 targetPosition = new Vector3(horizontalAxisScaled, transform.position.y, transform.position.z);
+        horizontalDelta = Mathf.Abs(horizontalAxisScaled - transform.position.x);
         transform.position = Vector3.Lerp(transform.position, targetPosition, horizontalSmoothness);
         if (Input.GetButtonDown("Jump") && grounded)
         {
