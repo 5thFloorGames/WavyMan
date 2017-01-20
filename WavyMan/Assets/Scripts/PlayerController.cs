@@ -29,10 +29,14 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SpawnCurveNodes()
     {
+        GameObject currentNode = null;
+        GameObject previousNode = null;
         while (true)
         {
-            Instantiate(curveNodePrefab, transform.position, Quaternion.identity);
-            yield return null;
+            previousNode = currentNode;
+            currentNode = Instantiate(curveNodePrefab, transform.position, Quaternion.identity);
+            currentNode.GetComponent<CurveNodeController>().SetPreviousNode(previousNode);
+            yield return new WaitForFixedUpdate();
         }
     }
 
