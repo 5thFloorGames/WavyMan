@@ -25,6 +25,7 @@ public class EnemyNodeController : MonoBehaviour
     {
         if(col.tag == "Wave"){
 			gameController.AddPoints();
+			SpawnSplash ();
             Destroy(gameObject);
         }
     }
