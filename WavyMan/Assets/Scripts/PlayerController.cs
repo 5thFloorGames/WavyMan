@@ -7,13 +7,16 @@ public class PlayerController : MonoBehaviour
     private Rigidbody bod;
     public Vector3 jumpForce;
     private bool grounded = true;
-    public float horizontalMaxDistanceFromCenter = 2;
+    public float horizontalMaxDistanceFromCenter = 1f;
+    public float verticalMaxDistanceFromCenter = 1f;
     public GameObject curveNodePrefab;
     public GameObject damageNodePrefab;
     public float horizontalSmoothness = 0.25f;
     private GameObject currentNode = null;
     private GameObject previousNode = null;
     private float horizontalDelta;
+    
+    public GameObject Sword;
 
     void Awake()
     {
@@ -25,7 +28,7 @@ public class PlayerController : MonoBehaviour
         HandleInput();
         if (horizontalDelta > 1)
         {
-            Instantiate(damageNodePrefab, previousNode.transform.position, Quaternion.identity);
+            //Instantiate(damageNodePrefab, previousNode.transform.position, Quaternion.identity);
         }
         previousNode = currentNode;
         currentNode = Instantiate(curveNodePrefab, transform.position, Quaternion.identity);
@@ -41,7 +44,21 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         float horizontalAxisScaled = Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter;
-        Vector3 targetPosition = new Vector3(horizontalAxisScaled, transform.position.y, transform.position.z);
+        float verticalAxisScaled = Input.GetAxis("Vertical") * verticalMaxDistanceFromCenter;
+        
+        float swordHorizontal = Input.GetAxis("SwordHorizontal");
+        float swordVertical = Input.GetAxis("SwordVertical");
+        
+        if(Sword != null){
+            Sword.transform.localPosition = new Vector3((swordHorizontal) * 1.5f,(swordVertical) * 1.5f, 0);
+            if(swordVertical < 0){
+                Sword.transform.rotation = Quaternion.Euler(0,0, 270 + swordHorizontal * 90);
+            } else {
+                Sword.transform.rotation = Quaternion.Euler(0,0, 90 + swordHorizontal * -90);
+            }
+        }
+        
+        Vector3 targetPosition = new Vector3(horizontalAxisScaled, verticalAxisScaled, transform.position.z);
         horizontalDelta = Mathf.Abs(horizontalAxisScaled - transform.position.x);
         transform.position = Vector3.Lerp(transform.position, targetPosition, horizontalSmoothness);
         if (Input.GetButtonDown("Jump") && grounded)
