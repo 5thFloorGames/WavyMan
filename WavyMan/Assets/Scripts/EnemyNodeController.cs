@@ -22,6 +22,7 @@ public class EnemyNodeController : MonoBehaviour
     {
         if(col.tag == "Player"){
             print("Hit a thing!");
+            Destroy(gameObject);
         }
     }
 }
