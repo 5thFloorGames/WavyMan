@@ -9,12 +9,10 @@ public class CreateTrail : MonoBehaviour {
     private GameObject previousNode = null;
     public ParticleSystem particles;
     
-	// Use this for initialization
 	void Start () {
 		particles.Stop();
 	}
-	
-	// Update is called once per frame
+
 	void FixedUpdate () {
         if(Input.GetButton("Swing")) {
             if(!particles.isEmitting) {

@@ -8,7 +8,7 @@ public class SpawnEnemy : MonoBehaviour {
 
 
     void Awake(){
-        EnemyNode = Resources.Load<GameObject>("Enemy Node");
+        EnemyNode = Resources.Load<GameObject>("Enemy");
     }
 	// Use this for initialization
 	void Start () {
