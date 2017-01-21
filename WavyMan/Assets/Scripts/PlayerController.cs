@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     private GameObject currentNode = null;
     private GameObject previousNode = null;
     private float horizontalDelta;
-    
-    public GameObject Sword;
 
     void Awake()
     {
@@ -42,25 +40,14 @@ public class PlayerController : MonoBehaviour
     }
 
     private void HandleInput()
-    {
+    {    
         float horizontalAxisScaled = Input.GetAxis("Horizontal") * horizontalMaxDistanceFromCenter;
         float verticalAxisScaled = Input.GetAxis("Vertical") * verticalMaxDistanceFromCenter;
-        
-        float swordHorizontal = Input.GetAxis("SwordHorizontal");
-        float swordVertical = Input.GetAxis("SwordVertical");
-        
-        if(Sword != null){
-            Sword.transform.localPosition = new Vector3((swordHorizontal) * 1.5f,(swordVertical) * 1.5f, 0);
-            if(swordVertical < 0){
-                Sword.transform.rotation = Quaternion.Euler(0,0, 270 + swordHorizontal * 90);
-            } else {
-                Sword.transform.rotation = Quaternion.Euler(0,0, 90 + swordHorizontal * -90);
-            }
-        }
         
         Vector3 targetPosition = new Vector3(horizontalAxisScaled, verticalAxisScaled, transform.position.z);
         horizontalDelta = Mathf.Abs(horizontalAxisScaled - transform.position.x);
         transform.position = Vector3.Lerp(transform.position, targetPosition, horizontalSmoothness);
+        
         if (Input.GetButtonDown("Jump") && grounded)
         {
             grounded = false;
