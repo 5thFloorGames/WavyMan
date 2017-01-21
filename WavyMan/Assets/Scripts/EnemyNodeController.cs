@@ -20,9 +20,8 @@ public class EnemyNodeController : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.GetComponent<CurveNodeController>())
-        {
-			
+        if(col.tag == "Player"){
+            print("Hit a thing!");
         }
     }
 }
