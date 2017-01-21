@@ -11,7 +11,7 @@ public class CreateTrail : MonoBehaviour {
     
 	// Use this for initialization
 	void Start () {
-		particles.Pause();
+		particles.Stop();
 	}
 	
 	// Update is called once per frame
@@ -25,7 +25,7 @@ public class CreateTrail : MonoBehaviour {
             currentNode = Instantiate(curveNodePrefad, transform.position, Quaternion.identity);
             currentNode.GetComponent<CurveNodeController>().SetPreviousNode(previousNode);
         } else if(particles.isEmitting){
-		  particles.Pause();
+		  particles.Stop();
         }
 	}
 }

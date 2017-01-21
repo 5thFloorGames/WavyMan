@@ -14,7 +14,7 @@ public class InterfaceManager : MonoBehaviour {
         textToSound.Add(texts[0], Resources.Load<AudioClip>("Audio/Wavyman 2"));
         textToSound.Add(texts[1], Resources.Load<AudioClip>("Audio/Heavenly"));
         textToSound.Add(texts[2], Resources.Load<AudioClip>("Audio/You've got it"));
-        wavyTextPrefab = Resources.Load<GameObject>("WavyText");
+        wavyTextPrefab = Resources.Load<GameObject>("Wavy Text");
 	}
 
 	void Update () {
