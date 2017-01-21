@@ -30,10 +30,22 @@ public class PlayerAndSwordController : MonoBehaviour {
 	}
     
     void HandleInput(){
-        bod.AddForce(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
+        bod.velocity = new Vector3(2 * Input.GetAxis("Horizontal"), 2 * Input.GetAxis("Vertical"), 0);
         
-        bod.AddForce(-transform.position.x, 0, 0);
-        bod.AddForce(0, -transform.position.y , 0);
+        Vector3 oppositeVelocity = new Vector3(-transform.position.x, -transform.position.y, 0);
+        
+        if(Mathf.Abs(transform.position.y) > 0.7){
+            bod.velocity += oppositeVelocity * 0.5f;
+        }
+        
+        if(Mathf.Abs(transform.position.x) > 1){
+            bod.velocity += oppositeVelocity * 0.75f;
+        }
+        
+        bod.velocity += oppositeVelocity * 0.75f;
+        
+        //bod.AddForce(-transform.position.x, 0, 0);
+        //bod.AddForce(0, -transform.position.y , 0);
         
         float swordHorizontal = Input.GetAxis("SwordHorizontal");
         float swordVertical = Input.GetAxis("SwordVertical");
