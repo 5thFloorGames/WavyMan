@@ -10,19 +10,20 @@ public class EnemyNodeController : MonoBehaviour
 
     void Awake()
     {
-        gameController = Component.FindObjectOfType<GameController>();
+        gameController = GameObject.FindObjectOfType<GameController>();
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.velocity = new Vector3(0,0,-1 * Random.Range(0.1f, 1.5f));
     }
     
     void Update(){
-        rigidBody.AddForce(new Vector3(0f,0f,-0.1f));
+
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if(col.tag == "Player"){
-            print("Hit a thing!");
+        if(col.tag == "Wave"){
             Destroy(gameObject);
+            gameController.AddPoints();
         }
     }
 }
