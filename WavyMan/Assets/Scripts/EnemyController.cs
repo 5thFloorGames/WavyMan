@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     private GameController gameController;
     private Rigidbody rigidBody;
 	private GameObject splashEffect;
+	private Animator animator;
 
     void Awake()
     {
@@ -15,6 +16,8 @@ public class EnemyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.velocity = new Vector3(0,0,-1 * Random.Range(0.1f, 1.5f));
 		splashEffect = Resources.Load <GameObject>("Splash Effect");
+		animator = gameObject.GetComponentInChildren<Animator> ();
+		RandomAnimation ();
     }
     
     void Update(){
@@ -32,5 +35,17 @@ public class EnemyController : MonoBehaviour
 
 	void SpawnSplash() {
 		Instantiate(splashEffect, transform.position, Quaternion.identity);
+	}
+
+	void RandomAnimation() {
+		int animnumber = Random.Range (0,3);
+		if (animnumber == 0) {
+			animator.SetTrigger ("O");
+		} else if (animnumber == 1) {
+			animator.SetTrigger ("Gasm");
+		} else {
+			animator.SetTrigger ("Bite");
+		}
+
 	}
 }
