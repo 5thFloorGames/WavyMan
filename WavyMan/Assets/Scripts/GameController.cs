@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour
     
     private MusicController music;
     
+    private ColorChanger colorChange;
+    
     private int[] phrasePoints = {10, 15, 20, 30, 50};
     
     private int level = 0;
@@ -16,6 +18,7 @@ public class GameController : MonoBehaviour
    void Start(){
        interfaceMan = FindObjectOfType<InterfaceManager>();
        music = gameObject.GetComponent<MusicController>();
+       colorChange = gameObject.GetComponent<ColorChanger>();
    }
    
    public void AddPoints(){
@@ -29,6 +32,7 @@ public class GameController : MonoBehaviour
                    level = 4;
                }
                music.LevelUp();
+               colorChange.SendMessage("ChangeColor");
            }
        }
    } 

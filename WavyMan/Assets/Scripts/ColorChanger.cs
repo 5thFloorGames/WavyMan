@@ -28,6 +28,7 @@ public class ColorChanger : MonoBehaviour {
 		if (nextColor > maxColor) {
 			nextColor = 0;
 		}
+        //print("changing color");
 		StartCoroutine(LerpColors(colorList[currentColor], colorList[nextColor]));
 		currentColor = nextColor;
 	}
