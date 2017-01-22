@@ -5,18 +5,18 @@ using UnityEngine;
 public class DestroyAfterDelay : MonoBehaviour {
 
     public float delay = 1.0f;
-    private AudioSource audioSource;
+    private Fabric.AudioComponent audioSource;
     private bool done = false;
 
 	// Use this for initialization
 	void Start () {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<Fabric.AudioComponent>();
 		//StartCoroutine(DestroyOnDelay());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(!audioSource.isPlaying && !done){
+		if(!audioSource.IsPlaying() && !done){
             done = true;
             StartCoroutine(DestroyOnDelay());
         }

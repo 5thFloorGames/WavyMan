@@ -30,9 +30,8 @@ public class InterfaceManager : MonoBehaviour {
 		newText.GetComponent<RectTransform>().transform.localPosition = new Vector3 (horizontal, vertical, 0);
         string textThing = texts[Random.Range(0, texts.Length)];
         newText.GetComponent<Text>().text = textThing;
-        AudioSource newSource = newText.GetComponent<AudioSource>();
-        newSource.clip = textToSound[textThing];
-        newSource.Play();
+        Fabric.AudioComponent newSource = newText.GetComponent<Fabric.AudioComponent>();
+        newSource.AudioClip = textToSound[textThing];
 	}
 
 }
