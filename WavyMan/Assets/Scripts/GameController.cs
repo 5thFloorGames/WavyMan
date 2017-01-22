@@ -7,12 +7,15 @@ public class GameController : MonoBehaviour
     private int pointCounter = 0;
     private InterfaceManager interfaceMan;
     
+    private MusicController music;
+    
     private int[] phrasePoints = {10, 15, 20, 30, 50};
     
     private int level = 0;
    
    void Start(){
        interfaceMan = FindObjectOfType<InterfaceManager>();
+       music = gameObject.GetComponent<MusicController>();
    }
    
    public void AddPoints(){
@@ -25,7 +28,7 @@ public class GameController : MonoBehaviour
                if(level > 4){
                    level = 4;
                }
-               print("LEVELUP");
+               music.LevelUp();
            }
        }
    } 

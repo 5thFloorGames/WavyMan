@@ -52,7 +52,6 @@ public class InterfaceManager : MonoBehaviour {
 		float vertical = Random.Range (-50.0f, 50.0f);
 		newText.GetComponent<RectTransform>().transform.localPosition = new Vector3 (horizontal, vertical, 0);
         newText.GetComponent<Text>().text = textThing;
-
 	}
 
 }
