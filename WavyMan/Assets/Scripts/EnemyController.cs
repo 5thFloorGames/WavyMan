@@ -39,7 +39,6 @@ public class EnemyController : MonoBehaviour
 
 	void RandomAnimation() {
 		int animnumber = Random.Range (0,3);
-		print (animnumber);
 		if (animnumber == 0) {
 			animator.SetTrigger ("O");
 		} else if (animnumber == 1) {
