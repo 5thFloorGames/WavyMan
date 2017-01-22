@@ -20,6 +20,7 @@ public class SongTitles : MonoBehaviour {
 	}
     
     IEnumerator FadeOut(){
+        yield return new WaitForSeconds(2);
         while(image.color.a > 0){
             image.color = new Color(image.color.r, image.color.b, image.color.g, image.color.a - Time.deltaTime / 3);
             
