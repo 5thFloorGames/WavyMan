@@ -11,8 +11,7 @@ public class BgLayerAnimator : MonoBehaviour {
 		animator = gameObject.transform.GetChild (0).GetComponent<Animator>();
 		animator.Play ("bglayeranim", 0 , animationStartFrame/animationTotalFrames);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		
 	}
