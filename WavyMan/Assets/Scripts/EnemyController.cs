@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
     {
         gameController = GameObject.FindObjectOfType<GameController>();
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.velocity = new Vector3(0,0,-1 * Random.Range(0.1f, 1.5f));
+        rigidBody.velocity = new Vector3(0,0,-1 * Random.Range(0.1f, 1.5f) - 0.2f * gameController.getLevel());
 		splashEffect = Resources.Load <GameObject>("Splash Effect");
 		animator = gameObject.GetComponentInChildren<Animator> ();
 		RandomAnimation ();
