@@ -17,7 +17,6 @@ public class CharacterController : MonoBehaviour {
         bod = GetComponent<Rigidbody>();
     }
 
-	// Use this for initialization
 	void Start () {
 		StartCoroutine(SpawnParticle());
 	}
@@ -31,8 +30,7 @@ public class CharacterController : MonoBehaviour {
 			currentNode.GetComponent<TrailNodeController>().SetPreviousNode(previousNode);
         }
     }
-	
-	// Update is called once per frame
+
 	void FixedUpdate () {
         HandleInput();
 	}
