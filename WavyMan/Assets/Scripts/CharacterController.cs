@@ -10,6 +10,8 @@ public class CharacterController : MonoBehaviour {
     private GameObject previousNode = null;
     public GameObject curveNodePrefab;
     
+    private FabioAnimator fabio;
+    
     public float particleInterval = 0.1f;
 
     void Awake()
@@ -19,6 +21,7 @@ public class CharacterController : MonoBehaviour {
 
 	void Start () {
 		StartCoroutine(SpawnParticle());
+        fabio = FindObjectOfType<FabioAnimator>();
 	}
     
     IEnumerator SpawnParticle(){
@@ -60,6 +63,7 @@ public class CharacterController : MonoBehaviour {
             } else {
                 Sword.transform.rotation = Quaternion.Euler(0,0, 90 + swordHorizontal * -90);
             }
+            fabio.ArmPosition(7 - (((Sword.transform.rotation.eulerAngles.z % 360) / 360) - 90) * 7);
         }
     }
 }
