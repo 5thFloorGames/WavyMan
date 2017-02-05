@@ -7,10 +7,13 @@ public class FabioAnimator : MonoBehaviour {
 	Animator armAnimator;
 	Animator swordAnimator;
 	float num;
+    float previousNum;
 
 	void Start () {
+        previousNum = 9;
 		armAnimator = transform.FindChild ("Arms").GetComponent<Animator> ();
 		swordAnimator = transform.FindChild ("Sword").GetComponent<Animator>();
+        swordAnimator.SetBool("1", true);
 		num = 0;
 		ArmPosition (0);
 	}
@@ -19,7 +22,22 @@ public class FabioAnimator : MonoBehaviour {
 	}
 
 	public void ArmPosition(float positionNum) {
-		armAnimator.Play("wavymanArms", 0, positionNum/8.0f);
-		swordAnimator.Play("sword", 0, positionNum/8.0f);
+        if (previousNum == positionNum) {
+            return;
+        }
+        previousNum = positionNum;
+
+        print(positionNum);
+		armAnimator.Play("wavymanArms", 0, (positionNum - 1.0f)/8.0f);
+        //print((int)positionNum);
+
+        for (int i = 1; i <= 8; i++) {
+            if (i == (int)positionNum) {
+                swordAnimator.SetBool("" + i, true);
+            } else {
+                swordAnimator.SetBool("" + i, false);
+            }
+        }
+		//swordAnimator.Play("sword", 0, positionNum/8.0f);
 	}
 }
