@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class InterfaceManager : MonoBehaviour {
+
     private string[] texts = {
         "Ooh, wavy man", "Heavenly", "You've got it", "Amazing", "Faster!", "Groovy", "Juicy", "Keep going",
         "Nice", "Oh boy", "Oh boy!" , "Oh God!", "Oh wow", "So good", "Wavy", "Mmmm, Wavyman", "Oh, Wavyman",
@@ -57,9 +58,11 @@ public class InterfaceManager : MonoBehaviour {
         }
         DialogueSound[i++ % 2].AudioClip = textToSound[textThing];
         GameObject newText = Instantiate(wavyTextPrefab, transform);
-		float horizontal = Random.Range (-100.0f, 100.0f);
-		float vertical = Random.Range (-50.0f, 50.0f);
-		newText.GetComponent<RectTransform>().transform.localPosition = new Vector3 (horizontal, vertical, 0);
+		float horizontal = Random.Range (-200.0f, 200.0f);
+		float vertical = Random.Range (-100.0f, 100.0f);
+        float rotation = Random.Range(-20.0f, 20.0f);
+        newText.GetComponent<RectTransform>().transform.localPosition = new Vector3 (horizontal, vertical, 0);
+        newText.GetComponent<RectTransform>().transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, rotation));
         newText.GetComponent<Text>().text = textThing;
 	}
 
