@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -15,11 +16,19 @@ public class GameController : MonoBehaviour
     private int[] phrasePoints = {10, 15, 20, 30, 50};
     
     private int level = 0;
+
+    public Image FadeOut;
    
    void Start(){
        interfaceMan = FindObjectOfType<InterfaceManager>();
        music = gameObject.GetComponent<MusicController>();
        colorChange = gameObject.GetComponent<ColorChanger>();
+   }
+
+   void Update(){
+       if(Input.GetKeyDown(KeyCode.E)){
+            StartCoroutine(EndGame());
+       }
    }
    
    public void AddPoints(){
@@ -46,10 +55,12 @@ public class GameController : MonoBehaviour
    IEnumerator EndGame(){
        print("Spawning stopped!");
        FindObjectOfType<EnemySpawner>().StopSpawning();
-       foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
+       GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+       foreach(GameObject enemy in enemies){
            if(enemy != null){
                 enemy.GetComponent<EnemyController>().DestroyEnemy();
            }
+           FadeOut.color = new Color(FadeOut.color.r, FadeOut.color.g, FadeOut.color.b, FadeOut.color.a + 1.0f / enemies.Length);
            yield return new WaitForSeconds(0.1f);
        }
        SceneManager.LoadScene("Credits");
