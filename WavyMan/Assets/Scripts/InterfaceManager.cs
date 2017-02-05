@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class InterfaceManager : MonoBehaviour {
     private string[] texts = {
         "Ooh, wavy man", "Heavenly", "You've got it", "Amazing", "Faster!", "Groovy", "Juicy", "Keep going",
-        "Nice", "Oh boy", "Oh boy!" , "Oh God!", "Oh wow", "So good", "Wavy", "Mmmm, Wavyman"
+        "Nice", "Oh boy", "Oh boy!" , "Oh God!", "Oh wow", "So good", "Wavy", "Mmmm, Wavyman", "Oh, Wavyman",
+        "Finish her"
         };
     public Dictionary<string, AudioClip> textToSound;
     
@@ -34,7 +35,9 @@ public class InterfaceManager : MonoBehaviour {
         textToSound.Add(texts[13], Resources.Load<AudioClip>("Audio/So Good"));                                                                                
         textToSound.Add(texts[14], Resources.Load<AudioClip>("Audio/Wavy"));                                                                                                    
         textToSound.Add(texts[15], Resources.Load<AudioClip>("Audio/Wavyman 1"));                                                                                                                        
-                                                                         
+        textToSound.Add(texts[16], Resources.Load<AudioClip>("Audio/Wavyman 3"));                                                                                                                        
+        textToSound.Add(texts[17], Resources.Load<AudioClip>("Audio/Finish Her!"));                                                                                                                        
+
         wavyTextPrefab = Resources.Load<GameObject>("Wavy Text");
 	}
 
@@ -45,7 +48,7 @@ public class InterfaceManager : MonoBehaviour {
 	}
 
 	public void SpawnText() {
-        string textThing = texts[Random.Range(0, texts.Length)];
+        string textThing = texts[Random.Range(0, texts.Length - 1)];
         DialogueSound[i++ % 2].AudioClip = textToSound[textThing];
         GameObject newText = Instantiate(wavyTextPrefab, transform);
 		float horizontal = Random.Range (-100.0f, 100.0f);

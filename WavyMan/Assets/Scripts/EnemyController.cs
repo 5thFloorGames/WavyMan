@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
         if(col.tag == "Wave"){
 			gameController.AddPoints();
 			SpawnSplash ();
-            Destroy(gameObject);
+			Destroy(gameObject);
         }
     }
 

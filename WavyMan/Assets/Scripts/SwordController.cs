@@ -19,6 +19,7 @@ public class SwordController : MonoBehaviour {
 	void FixedUpdate () {
         if(Input.GetButton("Swing")) {
             if(!particles.isEmitting) {
+				Fabric.EventManager.Instance.PostEvent("Sword", Fabric.EventAction.PlaySound);
 				BurstOff ();
                 particles.Play();
             }
@@ -29,6 +30,7 @@ public class SwordController : MonoBehaviour {
 			nodeList.Add (currentNode);
 
         } else if(particles.isEmitting){
+			Fabric.EventManager.Instance.PostEvent("Sword", Fabric.EventAction.StopSound);
 			particles.Stop();
 			BurstOn ();
         }
