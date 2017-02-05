@@ -8,13 +8,16 @@ public class ColorChanger : MonoBehaviour {
 	public float colorLerpTime;
 
 	Camera cam;
+    Transform swordSprite;
 	int currentColor;
 	int maxColor;
 
 	void Start () {
-		cam = Camera.main.GetComponent<Camera>();;
+		cam = Camera.main.GetComponent<Camera>();
+        swordSprite = GameObject.Find("Player").transform.FindChild("Sprites").transform.FindChild("Sword");
 		currentColor = 0;
-		maxColor = colorList.Count-1;
+        StartCoroutine(LerpColors(colorList[currentColor], colorList[currentColor]));
+        maxColor = colorList.Count-1;
 	}
 
 	void Update () {
@@ -37,7 +40,8 @@ public class ColorChanger : MonoBehaviour {
 		float ElapsedTime = 0.0f;
 		while (ElapsedTime < colorLerpTime) {
 			ElapsedTime += Time.deltaTime;
-			cam.backgroundColor = Color.Lerp(startColor, endColor, (ElapsedTime / colorLerpTime));
+            swordSprite.GetComponent<SpriteRenderer>().color = Color.Lerp(startColor, endColor, (ElapsedTime / colorLerpTime));
+            cam.backgroundColor = Color.Lerp(startColor, endColor, (ElapsedTime / colorLerpTime));
 			yield return null;
 		}
 	}
