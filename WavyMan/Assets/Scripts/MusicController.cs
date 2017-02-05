@@ -8,8 +8,8 @@ public class MusicController : MonoBehaviour {
     public Fabric.RandomComponent randomness;
     private GameController controller;
     
-    private float[] delays = {2.3f, 2.0f, 1.7f, 1.4f, 1.0f};
-    private float[] delayRands = {2.0f, 1.6f, 1.2f, 0.8f, 0.3f};
+    private float[] delays = {1.15f, 1.0f, 0.85f, 0.7f, 0.5f};
+    private float[] delayRands = {1.0f, 0.8f, 0.6f, 0.4f, 0.15f};
     private List<AudioClip[]> preloadedLevels;
 
 

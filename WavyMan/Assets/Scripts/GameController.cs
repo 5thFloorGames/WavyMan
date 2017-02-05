@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class GameController : MonoBehaviour
                pointCounter = 0;
                if(level > 4){
                    level = 4;
+                   StartCoroutine(EndGame());
                }
                music.LevelUp();
                colorChange.SendMessage("ChangeColor");
@@ -40,4 +42,17 @@ public class GameController : MonoBehaviour
    public int getLevel(){
        return level;
    }
+
+   IEnumerator EndGame(){
+       print("Spawning stopped!");
+       FindObjectOfType<EnemySpawner>().StopSpawning();
+       foreach(GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")){
+           if(enemy != null){
+                enemy.GetComponent<EnemyController>().DestroyEnemy();
+           }
+           yield return new WaitForSeconds(0.1f);
+       }
+       SceneManager.LoadScene("Credits");
+   }
+
 }

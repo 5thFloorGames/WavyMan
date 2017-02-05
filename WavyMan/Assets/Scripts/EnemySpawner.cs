@@ -29,4 +29,8 @@ public class EnemySpawner : MonoBehaviour {
             Instantiate(EnemyNode, transform.position + (new Vector3(Random.Range(-1f,1f), Random.Range(-0.7f, 0.7f), 0)), Quaternion.identity);
         }
     }
+
+    public void StopSpawning(){
+        StopAllCoroutines();
+    }
 }
