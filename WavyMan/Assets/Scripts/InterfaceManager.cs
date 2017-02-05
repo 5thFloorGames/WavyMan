@@ -14,10 +14,13 @@ public class InterfaceManager : MonoBehaviour {
     private GameObject wavyTextPrefab;
     
     public Fabric.AudioComponent[] DialogueSound;
+
+    private GameController controller;
     
     private int i = 0;
 
 	void Start () {
+        controller = FindObjectOfType<GameController>();
 		textToSound = new Dictionary<string, AudioClip>();
         textToSound.Add(texts[0], Resources.Load<AudioClip>("Audio/Wavyman 2"));
         textToSound.Add(texts[1], Resources.Load<AudioClip>("Audio/Heavenly"));
@@ -49,6 +52,9 @@ public class InterfaceManager : MonoBehaviour {
 
 	public void SpawnText() {
         string textThing = texts[Random.Range(0, texts.Length - 1)];
+        if(controller.getLevel() > 3){
+            textThing = texts[Random.Range(0, texts.Length)];
+        }
         DialogueSound[i++ % 2].AudioClip = textToSound[textThing];
         GameObject newText = Instantiate(wavyTextPrefab, transform);
 		float horizontal = Random.Range (-100.0f, 100.0f);
