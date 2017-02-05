@@ -26,10 +26,7 @@ public class FabioAnimator : MonoBehaviour {
             return;
         }
         previousNum = positionNum;
-
-        print(positionNum);
 		armAnimator.Play("wavymanArms", 0, (positionNum - 1.0f)/8.0f);
-        //print((int)positionNum);
 
         for (int i = 1; i <= 8; i++) {
             if (i == (int)positionNum) {
