@@ -19,19 +19,33 @@ public class EnemyController : MonoBehaviour
 		animator = gameObject.GetComponentInChildren<Animator> ();
 		RandomAnimation ();
     }
-    
-    void Update(){
 
+	void Start(){
+		StartCoroutine(CheckDistance());
+	}
+    
+	IEnumerator CheckDistance(){
+		while(transform.position.z > -8){
+			yield return new WaitForSeconds(5);
+		}
+		Destroy(gameObject);
+	}
+
+    void Update(){
     }
 
     void OnTriggerEnter(Collider col)
     {
         if(col.tag == "Wave"){
+			DestroyEnemy();
+        }
+    }
+
+	public void DestroyEnemy(){
 			gameController.AddPoints();
 			SpawnSplash ();
 			Destroy(gameObject);
-        }
-    }
+	}
 
 	void SpawnSplash() {
 		Instantiate(splashEffect, transform.position, Quaternion.identity);

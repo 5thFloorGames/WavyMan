@@ -23,6 +23,7 @@ public class SwordController : MonoBehaviour {
 				BurstOff ();
                 particles.Play();
             }
+			//Handheld.Vibrate();
             previousNode = currentNode;
             currentNode = Instantiate(swordTrailNode, transform.position, Quaternion.identity);
             currentNode.GetComponent<TrailNodeController>().SetPreviousNode(previousNode);
